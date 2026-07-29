@@ -13,4 +13,14 @@ export class ComponentMissionSolution {
   protected readonly energy = signal(80);
   protected readonly shipImage = signal('/aurora-ship.svg');
   protected readonly enginesReady = signal(true);
+  protected readonly diagnosticsStatus = signal('Diagnostics have not run yet.');
+  protected readonly launchStatus = signal('Aurora is waiting for launch clearance.');
+
+  protected runDiagnostics(): void {
+    this.diagnosticsStatus.set('Diagnostics complete. All engines are ready.');
+  }
+
+  protected launchMission(): void {
+    this.launchStatus.set('Launch successful! Level 1 complete — Component Engineer badge earned!');
+  }
 }

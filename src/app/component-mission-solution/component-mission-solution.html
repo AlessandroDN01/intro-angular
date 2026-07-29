@@ -25,10 +25,23 @@
       </div>
     </dl>
 
-    <button type="button" [disabled]="!enginesReady()" [attr.aria-label]="'Launch ' + shipName()">
+    <div class="event-example">
+      <p class="example-tag">Working click example</p>
+      <button class="secondary-button" type="button" (click)="runDiagnostics()">
+        Run diagnostics
+      </button>
+      <p class="system-message" aria-live="polite">{{ diagnosticsStatus() }}</p>
+    </div>
+
+    <button
+      type="button"
+      [disabled]="!enginesReady()"
+      [attr.aria-label]="'Launch ' + shipName()"
+      (click)="launchMission()"
+    >
       Launch mission
     </button>
   </section>
 
-  <p class="mission-list">Mission complete — Component Engineer badge earned!</p>
+  <p class="mission-list launch-message" aria-live="polite">{{ launchStatus() }}</p>
 </article>

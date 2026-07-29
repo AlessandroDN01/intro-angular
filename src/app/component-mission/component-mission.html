@@ -35,14 +35,25 @@
       </div>
     </dl>
 
+    <div class="event-example">
+      <p class="example-tag">Working click example</p>
+      <button class="secondary-button" type="button" (click)="runDiagnostics()">
+        Run diagnostics
+      </button>
+      <p class="system-message" aria-live="polite">{{ diagnosticsStatus() }}</p>
+    </div>
+
     <!--
       TODO 3: Bind the button's disabled property.
       It should be disabled when enginesReady is false.
 
       TODO 4: Bind aria-label with [attr.aria-label].
       Make it say "Launch " followed by shipName.
+
+      TODO 5: Handle the click with (click) and call launchMission().
     -->
     <button type="button" disabled aria-label="Launch unavailable">Launch mission</button>
+    <p class="system-message launch-message" aria-live="polite">{{ launchStatus() }}</p>
   </section>
 
   <ol class="mission-list" aria-label="Mission objectives">
@@ -50,5 +61,7 @@
     <li><span>02</span> Connect the energy readout</li>
     <li><span>03</span> Unlock launch with property binding</li>
     <li><span>04</span> Bind an accessible launch label</li>
+    <li><span>05</span> Handle the launch click event</li>
+    <li><span>06</span> Update the mission status signal</li>
   </ol>
 </article>

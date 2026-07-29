@@ -124,6 +124,42 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
+.event-example {
+  margin-bottom: 1rem;
+  padding: 0.85rem;
+  border: 1px dashed #50687f;
+  border-radius: 0.65rem;
+  background: #0b1622;
+}
+
+.example-tag {
+  margin: 0 0 0.65rem;
+  color: #f7c75f;
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.secondary-button {
+  border: 1px solid #78e8ce;
+  background: transparent;
+  color: #a9f6e4;
+}
+
+.system-message {
+  min-height: 1.4em;
+  margin: 0.65rem 0 0;
+  color: #b8c6d9;
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
+.launch-message {
+  color: #a9f6e4;
+  text-align: center;
+}
+
 .mission-list {
   display: grid;
   gap: 0.6rem;

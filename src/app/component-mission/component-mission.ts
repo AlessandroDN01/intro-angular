@@ -14,4 +14,15 @@ export class ComponentMission {
   protected readonly energy = signal(80);
   protected readonly shipImage = signal('/aurora-ship.svg');
   protected readonly enginesReady = signal(true);
+  protected readonly diagnosticsStatus = signal('Diagnostics have not run yet.');
+  protected readonly launchStatus = signal('Aurora is waiting for launch clearance.');
+
+  // WORKING EXAMPLE: a template click calls this method and updates a signal.
+  protected runDiagnostics(): void {
+    this.diagnosticsStatus.set('Diagnostics complete. All engines are ready.');
+  }
+
+  protected launchMission(): void {
+    // TODO 6: Update launchStatus with a mission-complete message.
+  }
 }
