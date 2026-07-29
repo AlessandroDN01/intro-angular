@@ -1,0 +1,34 @@
+<article class="ship-card" [attr.aria-label]="shipName() + ' completed control panel'">
+  <div class="card-topline">
+    <span class="status-dot" aria-hidden="true"></span>
+    <span>Systems restored</span>
+    <span class="level">Level passed</span>
+  </div>
+
+  <div class="ship-visual">
+    <img [ngSrc]="shipImage()" width="640" height="360" alt="The Aurora training spaceship" />
+    <span class="scan-line" aria-hidden="true"></span>
+  </div>
+
+  <section class="readout">
+    <p class="label">Vessel</p>
+    <h3>{{ shipName() }}</h3>
+
+    <dl>
+      <div>
+        <dt>Captain</dt>
+        <dd>{{ captainName() }}</dd>
+      </div>
+      <div>
+        <dt>Energy</dt>
+        <dd>{{ energy() }}%</dd>
+      </div>
+    </dl>
+
+    <button type="button" [disabled]="!enginesReady()" [attr.aria-label]="'Launch ' + shipName()">
+      Launch mission
+    </button>
+  </section>
+
+  <p class="mission-list">Mission complete — Component Engineer badge earned!</p>
+</article>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">The Aurora spaceship</title>
+  <desc id="desc">A geometric training spaceship flying through a blue star field.</desc>
+  <defs>
+    <radialGradient id="space" cx="50%" cy="45%" r="70%">
+      <stop offset="0" stop-color="#183a55"/>
+      <stop offset="1" stop-color="#07111d"/>
+    </radialGradient>
+    <linearGradient id="hull" x1="0" x2="1">
+      <stop stop-color="#dce9f3"/>
+      <stop offset=".55" stop-color="#7894aa"/>
+      <stop offset="1" stop-color="#40566b"/>
+    </linearGradient>
+    <linearGradient id="wing" x1="0" x2="1">
+      <stop stop-color="#55dec3"/>
+      <stop offset="1" stop-color="#167b83"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="640" height="360" fill="url(#space)"/>
+  <g fill="#c8edff">
+    <circle cx="64" cy="64" r="2"/><circle cx="126" cy="125" r="1.5"/>
+    <circle cx="220" cy="46" r="1"/><circle cx="324" cy="82" r="2"/>
+    <circle cx="478" cy="51" r="1.5"/><circle cx="574" cy="112" r="2"/>
+    <circle cx="84" cy="288" r="1"/><circle cx="206" cy="304" r="2"/>
+    <circle cx="522" cy="280" r="1.5"/><circle cx="596" cy="232" r="1"/>
+  </g>
+  <ellipse cx="170" cy="194" rx="70" ry="18" fill="#55dec3" opacity=".38" filter="url(#glow)"/>
+  <path d="M151 168 76 209l105-9 73 58-31-76z" fill="url(#wing)"/>
+  <path d="m151 204-67 28 98-5 51-40z" fill="#205b69"/>
+  <path d="M142 184c81-81 245-91 369-6-106 68-254 80-369 6Z" fill="url(#hull)"/>
+  <path d="M305 122c40 2 81 13 118 34l-168 16c8-24 24-42 50-50Z" fill="#17384f"/>
+  <path d="M321 129c25 3 49 10 72 20l-110 11c9-15 21-25 38-31Z" fill="#7be5ed" opacity=".72"/>
+  <path d="m432 188 74 46-114-22-82 42 42-57z" fill="url(#wing)"/>
+  <path d="M145 176 92 184l49 9z" fill="#f8ca65"/>
+  <circle cx="478" cy="178" r="8" fill="#f8ca65"/>
+</svg>

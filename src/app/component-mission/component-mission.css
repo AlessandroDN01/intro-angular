@@ -1,0 +1,149 @@
+:host {
+  display: block;
+}
+
+.ship-card {
+  overflow: hidden;
+  border: 1px solid #33475d;
+  border-radius: 1rem;
+  background: #111d2a;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 25%);
+}
+
+.card-topline {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #33475d;
+  color: #b8c6d9;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 0.55rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #f7c75f;
+  box-shadow: 0 0 0.7rem #f7c75f;
+}
+
+.level {
+  margin-left: auto;
+  color: #78e8ce;
+}
+
+.ship-visual {
+  position: relative;
+  overflow: hidden;
+  background: #08121e;
+}
+
+.ship-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.scan-line {
+  position: absolute;
+  inset: 55% 0 auto;
+  height: 1px;
+  background: #78e8ce;
+  box-shadow: 0 0 1rem #78e8ce;
+}
+
+.readout {
+  padding: 1.35rem;
+}
+
+.label {
+  margin: 0;
+  color: #78e8ce;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 0.2rem 0 1.2rem;
+  color: #fff;
+  font-size: 2rem;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin: 0 0 1.2rem;
+}
+
+dl div {
+  padding: 0.8rem;
+  border: 1px solid #33475d;
+  border-radius: 0.6rem;
+  background: #0b1622;
+}
+
+dt {
+  color: #8fa1b5;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+dd {
+  margin: 0.2rem 0 0;
+  color: #f6f8fb;
+  font-size: 1.1rem;
+  font-weight: 750;
+}
+
+button {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 0;
+  border-radius: 0.55rem;
+  background: #78e8ce;
+  color: #082018;
+  font: inherit;
+  font-weight: 850;
+}
+
+button:disabled {
+  background: #34475a;
+  color: #9cacbd;
+  cursor: not-allowed;
+}
+
+button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.mission-list {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 1.2rem;
+  border-top: 1px solid #33475d;
+  background: #0b1622;
+  color: #cbd5e1;
+  list-style: none;
+}
+
+.mission-list li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
+  line-height: 1.4;
+}
+
+.mission-list span {
+  color: #f7c75f;
+  font-size: 0.72rem;
+  font-weight: 850;
+}

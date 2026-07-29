@@ -1,0 +1,54 @@
+<article class="ship-card" [attr.aria-label]="shipName() + ' control panel'">
+  <div class="card-topline">
+    <span class="status-dot" aria-hidden="true"></span>
+    <span>Training simulation</span>
+    <span class="level">Level 01</span>
+  </div>
+
+  <div class="ship-visual">
+    <!-- WORKING EXAMPLE: property binding sends TS data to an image property. -->
+    <img
+      [ngSrc]="shipImage()"
+      width="640"
+      height="360"
+      priority
+      alt="The Aurora training spaceship"
+    />
+    <span class="scan-line" aria-hidden="true"></span>
+  </div>
+
+  <section class="readout">
+    <!-- WORKING EXAMPLE: interpolation displays TypeScript data as text. -->
+    <p class="label">Vessel</p>
+    <h3>{{ shipName() }}</h3>
+
+    <dl>
+      <div>
+        <dt>Captain</dt>
+        <!-- TODO 1: Replace the placeholder with captainName from the class. -->
+        <dd>Unknown</dd>
+      </div>
+      <div>
+        <dt>Energy</dt>
+        <!-- TODO 2: Display energy from the class, followed by a % sign. -->
+        <dd>--%</dd>
+      </div>
+    </dl>
+
+    <!--
+      TODO 3: Bind the button's disabled property.
+      It should be disabled when enginesReady is false.
+
+      TODO 4: Bind aria-label with [attr.aria-label].
+      Make it say "Launch " followed by shipName.
+    -->
+    <button type="button" disabled aria-label="Launch unavailable">Launch mission</button>
+  </section>
+
+  <ol class="mission-list" aria-label="Mission objectives">
+    <li><span>01</span> Restore the captain's name with interpolation</li>
+    <li><span>02</span> Connect the energy readout</li>
+    <li><span>03</span> Unlock launch with property binding</li>
+    <li><span>04</span> Bind an accessible launch label</li>
+  </ol>
+</article>
