@@ -127,4 +127,48 @@ describe('App', () => {
 
     expect(solution.textContent).toContain('Flight path clear — no asteroids detected.');
   });
+
+  it('should render the crew communication mission and its solution', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-crew-mission')).toBeTruthy();
+    expect(compiled.querySelector('app-crew-mission-solution')).toBeTruthy();
+    expect(compiled.textContent).toContain('Assemble the Flight Crew');
+  });
+
+  it('should send the working profile output to the parent', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const mission = fixture.nativeElement.querySelector('app-crew-mission') as HTMLElement;
+    const viewProfileButton = mission.querySelector('app-crew-card button') as HTMLButtonElement;
+
+    viewProfileButton.click();
+    await fixture.whenStable();
+
+    expect(mission.querySelector('.terminal-message')?.textContent).toContain(
+      'Personnel file opened for Ada Vega',
+    );
+  });
+
+  it('should assemble the crew through child outputs in the solution', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const solution = fixture.nativeElement.querySelector(
+      'app-crew-mission-solution',
+    ) as HTMLElement;
+    const assignmentButtons = Array.from(
+      solution.querySelectorAll<HTMLButtonElement>('.assign-button:not(:disabled)'),
+    );
+
+    assignmentButtons[0].click();
+    assignmentButtons[1].click();
+    await fixture.whenStable();
+
+    expect(solution.querySelector('.crew-count')?.textContent).toContain('2 assigned');
+    expect(solution.querySelector('.badge-message')?.textContent).toContain(
+      'Component Communicator badge earned',
+    );
+  });
 });

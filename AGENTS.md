@@ -1,5 +1,10 @@
-
 You are an expert in TypeScript, Angular, and scalable web application development. You write functional, maintainable, performant, and accessible code following Angular and TypeScript best practices.
+
+## Project Teaching Context
+
+Before modifying an existing lesson or creating a new one, read
+`docs/TEACHING-PLAN.md` completely. Preserve its Aurora storyline, lesson
+structure, student/solution convention, and progressive teaching approach.
 
 ## TypeScript Best Practices
 

@@ -1,0 +1,112 @@
+:host {
+  display: block;
+}
+
+.crew-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.85rem;
+  padding: 1rem;
+  border: 1px solid #33475d;
+  border-radius: 0.7rem;
+  background: #111d2a;
+}
+
+.portrait {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  place-items: center;
+  border: 1px solid #78e8ce;
+  border-radius: 50%;
+  background: #14333a;
+  color: #b7f8e8;
+  font-size: 1.35rem;
+  font-weight: 850;
+}
+
+.crew-id,
+.role,
+.availability {
+  margin: 0;
+}
+
+.crew-id {
+  color: #8fa1b5;
+  font-family: ui-monospace, monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+}
+
+h4 {
+  margin: 0.15rem 0;
+  color: #f6f8fb;
+  font-size: 1.05rem;
+}
+
+.role {
+  color: #b8c6d9;
+  font-size: 0.85rem;
+}
+
+.availability {
+  margin-top: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.available {
+  color: #78e8ce;
+}
+
+.unavailable {
+  color: #ff9ba0;
+}
+
+.card-actions {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+button {
+  min-height: 2.7rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #50687f;
+  border-radius: 0.45rem;
+  background: #142536;
+  color: #e6edf5;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: #78e8ce;
+}
+
+button:focus-visible {
+  outline: 3px solid #78e8ce;
+  outline-offset: 3px;
+}
+
+.assign-button {
+  border-color: #78e8ce;
+  background: #78e8ce;
+  color: #082018;
+}
+
+button:disabled {
+  border-color: #405266;
+  background: #34475a;
+  color: #9cacbd;
+  cursor: not-allowed;
+}
+
+@media (max-width: 420px) {
+  .card-actions {
+    grid-template-columns: 1fr;
+  }
+}

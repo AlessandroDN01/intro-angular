@@ -1,0 +1,27 @@
+<article class="crew-card">
+  <div class="portrait" aria-hidden="true">{{ name().charAt(0) }}</div>
+
+  <div class="crew-details">
+    <p class="crew-id">Crew ID {{ memberId() }}</p>
+    <h4>{{ name() }}</h4>
+    <p class="role">{{ role() }}</p>
+
+    @if (available()) {
+      <p class="availability available"><span aria-hidden="true">●</span> Available for duty</p>
+    } @else {
+      <p class="availability unavailable"><span aria-hidden="true">●</span> Currently assigned</p>
+    }
+  </div>
+
+  <div class="card-actions">
+    <button type="button" (click)="viewProfile()">View profile</button>
+    <button
+      class="assign-button"
+      type="button"
+      [disabled]="!available()"
+      (click)="requestAssignment()"
+    >
+      Assign to Aurora
+    </button>
+  </div>
+</article>

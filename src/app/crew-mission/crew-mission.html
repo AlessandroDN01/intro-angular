@@ -1,0 +1,45 @@
+<article class="terminal-card" aria-label="Aurora crew assignment terminal">
+  <header class="terminal-header">
+    <div>
+      <p class="kicker">Personnel network</p>
+      <h3>Flight crew terminal</h3>
+    </div>
+    <span class="crew-count">{{ assignedCrewIds().length }} assigned</span>
+  </header>
+
+  <div class="teaching-note">
+    <p><strong>Parent:</strong> owns the crew collection and assignment state.</p>
+    <p><strong>Child:</strong> displays one reusable crew card.</p>
+  </div>
+
+  <section class="crew-list" aria-label="Crew candidates">
+    @for (member of crewMembers(); track member.id) {
+      <!--
+        WORKING INPUTS: memberId and name travel from parent to child.
+
+        TODO 1: Bind member.role to the child's role input.
+        TODO 2: Bind member.available to the child's available input.
+
+        WORKING OUTPUT: profileViewed travels from child to parent.
+        $event contains the name emitted by the crew card.
+
+        TODO 6: Listen for (assigned) and call assignCrewMember($event).
+      -->
+      <app-crew-card
+        [memberId]="member.id"
+        [name]="member.name"
+        (profileViewed)="showProfile($event)"
+      />
+    }
+  </section>
+
+  <p class="terminal-message" aria-live="polite">{{ terminalMessage() }}</p>
+
+  <ol class="objectives" aria-label="Crew communication objectives">
+    <li><span>01</span> Connect role and availability inputs</li>
+    <li><span>02</span> Handle the assignment click</li>
+    <li><span>03</span> Emit the crew member ID</li>
+    <li><span>04</span> Listen with $event in the parent</li>
+    <li><span>05</span> Update the parent's assignment signal</li>
+  </ol>
+</article>

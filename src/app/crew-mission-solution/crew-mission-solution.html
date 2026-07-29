@@ -1,0 +1,38 @@
+<article class="terminal-card" aria-label="Completed Aurora crew assignment terminal">
+  <header class="terminal-header">
+    <div>
+      <p class="kicker">Personnel network</p>
+      <h3>Flight crew terminal</h3>
+    </div>
+    <span class="crew-count">{{ assignedCrewIds().length }} assigned</span>
+  </header>
+
+  <div class="teaching-note">
+    <p><strong>Inputs:</strong> parent data travels down into each crew card.</p>
+    <p><strong>Outputs:</strong> crew-card events travel back up to the parent.</p>
+  </div>
+
+  <section class="crew-list" aria-label="Crew candidates">
+    @for (member of crewMembers(); track member.id) {
+      <app-crew-card-solution
+        [memberId]="member.id"
+        [name]="member.name"
+        [role]="member.role"
+        [available]="member.available"
+        (profileViewed)="showProfile($event)"
+        (assigned)="assignCrewMember($event)"
+      />
+    }
+  </section>
+
+  <p class="terminal-message" aria-live="polite">{{ terminalMessage() }}</p>
+  @if (assignedCrewIds().length >= 2) {
+    <p class="badge-message" aria-live="polite">
+      Flight crew assembled — Component Communicator badge earned!
+    </p>
+  } @else {
+    <p class="badge-message" aria-live="polite">
+      Assign two available specialists to earn the Component Communicator badge.
+    </p>
+  }
+</article>
