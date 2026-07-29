@@ -96,6 +96,35 @@ summary:focus-visible {
   line-height: 1.55;
 }
 
+.level-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 5rem 0;
+  color: #f7c75f;
+  font-size: 0.75rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.level-divider::before,
+.level-divider::after {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, #50687f);
+  content: '';
+}
+
+.level-divider::after {
+  background: linear-gradient(90deg, #50687f, transparent);
+}
+
+.level-two-header h1 {
+  max-width: 900px;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+}
+
 @media (max-width: 800px) {
   main {
     padding-top: 2.5rem;

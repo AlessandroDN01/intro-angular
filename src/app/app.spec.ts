@@ -54,4 +54,77 @@ describe('App', () => {
       'Component Engineer badge earned',
     );
   });
+
+  it('should render the control flow mission and its solution', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-control-flow-mission')).toBeTruthy();
+    expect(compiled.querySelector('app-control-flow-mission-solution')).toBeTruthy();
+    expect(compiled.textContent).toContain('Navigate the Asteroid Field');
+  });
+
+  it('should render every shield conditional branch in the solution', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const solution = fixture.nativeElement.querySelector(
+      'app-control-flow-mission-solution',
+    ) as HTMLElement;
+    const shieldControls = solution.querySelector(
+      '[aria-label="Shield simulation controls"]',
+    ) as HTMLElement;
+    const [stableButton, weakenedButton, criticalButton] = Array.from(
+      shieldControls.querySelectorAll('button'),
+    );
+
+    stableButton.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Shields stable');
+
+    weakenedButton.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Shields weakened');
+
+    criticalButton.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Critical shield failure');
+  });
+
+  it('should render every scanner conditional branch in the working example', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const solution = fixture.nativeElement.querySelector(
+      'app-control-flow-mission-solution',
+    ) as HTMLElement;
+    const cycleScannerButton = Array.from(solution.querySelectorAll('button')).find(
+      (button) => button.textContent?.trim() === 'Cycle scanner',
+    );
+
+    expect(solution.textContent).toContain('Scanner online');
+
+    cycleScannerButton?.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Scanner calibrating');
+
+    cycleScannerButton?.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Scanner offline');
+  });
+
+  it('should render the empty scanner state in the solution', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const solution = fixture.nativeElement.querySelector(
+      'app-control-flow-mission-solution',
+    ) as HTMLElement;
+    const clearButton = Array.from(solution.querySelectorAll('button')).find(
+      (button) => button.textContent?.trim() === 'Clear',
+    );
+
+    clearButton?.click();
+    await fixture.whenStable();
+
+    expect(solution.textContent).toContain('Flight path clear — no asteroids detected.');
+  });
 });

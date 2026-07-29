@@ -1,0 +1,131 @@
+<article class="console-card" aria-label="Completed Aurora navigation console">
+  <header class="console-header">
+    <div>
+      <p class="kicker">Sector AX-19</p>
+      <h3>Navigation console</h3>
+    </div>
+    <span class="coordinates">43.7 · 09.2</span>
+  </header>
+
+  <section class="system-panel" aria-labelledby="solution-scanner-title">
+    <div class="panel-heading">
+      <div>
+        <p class="step">Example · &#64;if, &#64;else if and &#64;else</p>
+        <h4 id="solution-scanner-title">Scanner link</h4>
+      </div>
+      <button class="small-button" type="button" (click)="cycleScannerStatus()">
+        Cycle scanner
+      </button>
+    </div>
+
+    @if (scannerStatus() === 'online') {
+      <p class="notice success"><span aria-hidden="true">●</span> Scanner online</p>
+    } @else if (scannerStatus() === 'calibrating') {
+      <p class="notice warning"><span aria-hidden="true">●</span> Scanner calibrating</p>
+    } @else {
+      <p class="notice danger"><span aria-hidden="true">●</span> Scanner offline</p>
+    }
+  </section>
+
+  <section class="system-panel" aria-labelledby="solution-flight-title">
+    <div class="panel-heading">
+      <div>
+        <p class="step">Example · &#64;switch</p>
+        <h4 id="solution-flight-title">Flight mode</h4>
+      </div>
+    </div>
+
+    @switch (flightMode()) {
+      @case ('manual') {
+        <p class="notice warning">Manual controls engaged</p>
+      }
+      @case ('autopilot') {
+        <p class="notice success">Autopilot is plotting the safest route</p>
+      }
+      @case ('docking') {
+        <p class="notice neutral">Docking assistance active</p>
+      }
+      @default {
+        <p class="notice danger">Unknown flight mode</p>
+      }
+    }
+  </section>
+
+  <section class="system-panel" aria-labelledby="solution-shield-title">
+    <div class="panel-heading">
+      <div>
+        <p class="step">Solved · &#64;if, &#64;else if and &#64;else</p>
+        <h4 id="solution-shield-title">Shield integrity: {{ shieldEnergy() }}%</h4>
+      </div>
+    </div>
+
+    <div class="button-group" aria-label="Shield simulation controls">
+      <button type="button" (click)="setShieldEnergy(90)">Stable</button>
+      <button type="button" (click)="setShieldEnergy(55)">Weakened</button>
+      <button type="button" (click)="setShieldEnergy(18)">Critical</button>
+    </div>
+
+    @if (shieldEnergy() > 70) {
+      <p class="notice success">Shields stable</p>
+    } @else if (shieldEnergy() >= 30) {
+      <p class="notice warning">Shields weakened</p>
+    } @else {
+      <p class="notice danger">Critical shield failure</p>
+    }
+  </section>
+
+  <section class="system-panel" aria-labelledby="solution-alert-title">
+    <div class="panel-heading">
+      <div>
+        <p class="step">Solved · &#64;switch</p>
+        <h4 id="solution-alert-title">Threat decoder: {{ alertLevel() }}</h4>
+      </div>
+      <button class="small-button" type="button" (click)="cycleAlert()">Cycle alert</button>
+    </div>
+
+    @switch (alertLevel()) {
+      @case ('safe') {
+        <p class="notice success">Route clear. Maintain current heading.</p>
+      }
+      @case ('warning') {
+        <p class="notice warning">Debris nearby. Reduce cruising speed.</p>
+      }
+      @case ('danger') {
+        <p class="notice danger">Collision risk! Begin evasive manoeuvres.</p>
+      }
+      @default {
+        <p class="notice offline">Alert signal could not be decoded.</p>
+      }
+    }
+  </section>
+
+  <section class="system-panel" aria-labelledby="solution-contacts-title">
+    <div class="panel-heading">
+      <div>
+        <p class="step">Solved · &#64;for, track and &#64;empty</p>
+        <h4 id="solution-contacts-title">Scanner contacts</h4>
+      </div>
+      <div class="compact-actions">
+        <button class="small-button" type="button" (click)="clearScan()">Clear</button>
+        <button class="small-button" type="button" (click)="restoreScan()">Restore</button>
+      </div>
+    </div>
+
+    <div class="contacts">
+      @for (asteroid of asteroids(); track asteroid.id; let position = $index; let total = $count) {
+        <article class="contact-card">
+          <header>
+            <h5>{{ asteroid.name }}</h5>
+            <span class="contact-number">Contact {{ position + 1 }} of {{ total }}</span>
+          </header>
+          <p>{{ asteroid.distance }} km from the Aurora</p>
+          <span class="threat">{{ asteroid.threat }} threat</span>
+        </article>
+      } @empty {
+        <p class="notice success">Flight path clear — no asteroids detected.</p>
+      }
+    </div>
+  </section>
+
+  <p class="badge-message">Navigation restored — Control Flow Navigator badge earned!</p>
+</article>

@@ -1,0 +1,226 @@
+:host {
+  display: block;
+}
+
+.console-card {
+  overflow: hidden;
+  border: 1px solid #33475d;
+  border-radius: 1rem;
+  background: #0b1622;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 25%);
+}
+
+.console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem;
+  border-bottom: 1px solid #33475d;
+  background: linear-gradient(135deg, rgb(120 232 206 / 10%), transparent 50%), #111d2a;
+}
+
+.kicker,
+.step {
+  margin: 0;
+  color: #78e8ce;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+h3,
+h4 {
+  margin: 0;
+  color: #f6f8fb;
+}
+
+h3 {
+  margin-top: 0.2rem;
+  font-size: 1.5rem;
+}
+
+h4 {
+  margin-top: 0.2rem;
+  font-size: 1rem;
+}
+
+.coordinates {
+  color: #8fa1b5;
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+}
+
+.system-panel {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #26394d;
+}
+
+.panel-heading,
+.compact-actions,
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+button {
+  min-height: 2.7rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid #50687f;
+  border-radius: 0.45rem;
+  background: #142536;
+  color: #e6edf5;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #78e8ce;
+  background: #193246;
+}
+
+button:focus-visible {
+  outline: 3px solid #78e8ce;
+  outline-offset: 3px;
+}
+
+.small-button {
+  min-height: 2.25rem;
+  padding-block: 0.35rem;
+}
+
+.button-group {
+  justify-content: flex-start;
+  margin-top: 0.8rem;
+}
+
+.notice {
+  margin: 0.8rem 0 0;
+  padding: 0.75rem;
+  border-left: 3px solid;
+  border-radius: 0.3rem;
+  background: #111d2a;
+  color: #dbe5ef;
+  line-height: 1.4;
+}
+
+.success {
+  border-color: #78e8ce;
+}
+
+.warning {
+  border-color: #f7c75f;
+}
+
+.danger {
+  border-color: #ff7e85;
+}
+
+.neutral {
+  border-color: #73b9ff;
+}
+
+.offline {
+  border-color: #66798c;
+  color: #9cacbd;
+}
+
+.contacts {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 0.8rem;
+}
+
+.contact-card {
+  padding: 0.8rem;
+  border: 1px solid #33475d;
+  border-radius: 0.55rem;
+  background: #111d2a;
+}
+
+.contact-card header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.contact-card h5 {
+  margin: 0;
+  color: #f6f8fb;
+  font-size: 0.95rem;
+}
+
+.contact-card p {
+  margin: 0.35rem 0 0;
+  color: #aebdcd;
+  font-size: 0.82rem;
+}
+
+.contact-number {
+  color: #f7c75f;
+  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+}
+
+.threat {
+  display: inline-block;
+  margin-top: 0.55rem;
+  color: #78e8ce;
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.objectives {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 1.2rem;
+  background: #07111d;
+  color: #cbd5e1;
+  list-style: none;
+}
+
+.objectives li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
+}
+
+.objectives span {
+  color: #f7c75f;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.badge-message {
+  margin: 0;
+  padding: 1.1rem;
+  border-top: 1px solid #33475d;
+  background: #102b2a;
+  color: #b7f8e8;
+  font-weight: 750;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .panel-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .button-group {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+}
