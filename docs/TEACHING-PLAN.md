@@ -216,6 +216,75 @@ reactor output, status, and readiness, then bind readiness to the ignition
 control. The solution provides stable, unstable, and critical presets so every
 derived state can be observed.
 
+### Level 5: Connect Mission Control
+
+Badge: **Dependency Navigator**
+
+Student service and components:
+
+- `src/app/mission-control/mission-control.service.ts`
+- `src/app/mission-control-mission/mission-control-mission.ts`
+- `src/app/mission-command-panel/mission-command-panel.ts`
+- `src/app/mission-log/mission-log.ts`
+
+Solution service and components:
+
+- `src/app/mission-control-solution/mission-control-solution.service.ts`
+- `src/app/mission-control-mission-solution/mission-control-mission-solution.ts`
+- `src/app/mission-command-panel-solution/mission-command-panel-solution.ts`
+- `src/app/mission-log-solution/mission-log-solution.ts`
+
+Concepts:
+
+- Focused Angular services
+- Angular 22's auto-provided `@Service()` decorator
+- Dependency injection with `inject()`
+- Sharing one service instance across independent components
+- Private writable signals exposed with `asReadonly()`
+- Meaningful service methods that protect state transitions
+- Immutable signal updates inside a service
+- Computed state owned by a service
+- Distinguishing local component state from shared service state
+
+The command panel is the complete injection and connection-state example.
+Students inject the same service into the receiving log, repair immutable
+command storage, render shared entries, and connect log clearing. The separate
+solution service prevents the student and reference simulations from sharing
+state with each other.
+
+### Level 6: Register the Expedition
+
+Badge: **Form Systems Specialist**
+
+Student files:
+
+- `src/app/expedition-form-mission/expedition-form-mission.ts`
+- `src/app/expedition-form-mission/expedition-form-mission.html`
+- `src/app/expedition-form-mission/expedition-form-mission.css`
+
+Solution files:
+
+- `src/app/expedition-form-mission-solution/expedition-form-mission-solution.ts`
+- `src/app/expedition-form-mission-solution/expedition-form-mission-solution.html`
+
+Concepts:
+
+- Angular 22 Signal Forms
+- Typed form models stored in signals
+- Field trees created with `form()`
+- Control binding with `[formField]`
+- Schema-based validation
+- `required()`, `email()`, `minLength()`, `min()`, and `max()`
+- Reactive field state such as `touched()`, `invalid()`, and `errors()`
+- Accessible labels, descriptions, error messages, and invalid state
+- Validated submission with `submit()`
+- Distinguishing application data, form state, and HTML controls
+
+The callsign is the complete binding, schema, and accessible-error example.
+Students connect and validate commander email, destination, crew size, and
+safety acceptance, then repair validated submission. Tests interact with the
+real DOM controls to confirm data reaches the typed model.
+
 ## Current application structure
 
 `src/app/app.html` presents all levels sequentially. Each student mission appears
@@ -228,7 +297,7 @@ The custom Aurora spaceship asset is:
 
 Current validation baseline:
 
-- 14 unit tests pass.
+- 20 unit tests pass.
 - Strict TypeScript compilation passes.
 - The Angular production build passes.
 - The project uses NVM Node `24.18.0`; load NVM and run `nvm use 24` when a shell
@@ -247,31 +316,6 @@ npm run build
 
 The roadmap is a direction, not a rigid commitment. Discuss the next lesson with
 the teacher before implementing it.
-
-### Level 5: Connect Mission Control
-
-Primary concepts: services and dependency injection.
-
-Possible mission:
-
-- Move mission-log responsibility into a focused root service.
-- Inject it with `inject()`.
-- Share mission state between two components.
-- Keep components concerned with presentation and interaction.
-
-Possible badge: **Dependency Navigator**
-
-### Level 6: Register the Expedition
-
-Primary concept: Angular Signal Forms.
-
-Possible mission:
-
-- Build a crew-expedition registration form.
-- Add type-safe fields and schema validation.
-- Show accessible validation messages and submission state.
-
-Possible badge: **Form Systems Specialist**
 
 ### Level 7: Chart the Galaxy
 

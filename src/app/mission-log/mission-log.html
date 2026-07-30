@@ -1,0 +1,23 @@
+<section class="log-panel" aria-labelledby="mission-log-title">
+  <div class="panel-heading">
+    <div>
+      <p class="step">Mission 1 · shared service consumer</p>
+      <h4 id="mission-log-title">Receiving terminal</h4>
+    </div>
+    <span class="count">-- received</span>
+  </div>
+
+  <!--
+    TODO 3: Replace the disconnected message with @for.
+    Read missionControl.logEntries(), track entry.id, and display each message.
+    Add an @empty branch that says "No commands received."
+  -->
+  <p class="empty-log">Receiving array disconnected</p>
+
+  <!--
+    TODO 4: Replace disabled with:
+    [disabled]="missionControl.commandCount() === 0"
+    Then add (click)="missionControl.clearLog()".
+  -->
+  <button type="button" disabled>Clear transmission log</button>
+</section>

@@ -1,0 +1,32 @@
+<article class="mission-card" aria-label="Completed Mission Control communication network">
+  <header class="mission-header">
+    <div>
+      <p class="kicker">Deep-space communications</p>
+      <h3>Aurora uplink network</h3>
+    </div>
+    <span class="frequency">127.4 MHz</span>
+  </header>
+
+  <div class="architecture-note" aria-label="Service communication architecture">
+    <span>Command component</span>
+    <span aria-hidden="true">→</span>
+    <strong>Shared service</strong>
+    <span aria-hidden="true">→</span>
+    <span>Log component</span>
+  </div>
+
+  <div class="terminal-stack">
+    <app-mission-command-panel-solution />
+    <app-mission-log-solution />
+  </div>
+
+  @if (missionControl.missionReady()) {
+    <p class="badge-message" aria-live="polite">
+      Mission Control connected — Dependency Navigator badge earned!
+    </p>
+  } @else {
+    <p class="badge-message" aria-live="polite">
+      Establish the uplink and request launch clearance.
+    </p>
+  }
+</article>

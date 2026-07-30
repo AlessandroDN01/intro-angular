@@ -1,0 +1,51 @@
+<section class="command-panel" aria-labelledby="solution-command-panel-title">
+  <div class="panel-heading">
+    <div>
+      <p class="step">Solved · inject()</p>
+      <h4 id="solution-command-panel-title">Command transmitter</h4>
+    </div>
+    <span class="connection" [class.online]="missionControl.connectionStatus() === 'online'">
+      <span aria-hidden="true">●</span>
+      {{ missionControl.connectionStatus() }}
+    </span>
+  </div>
+
+  <p class="explanation">This component sends commands through the injected shared service.</p>
+
+  <div class="button-group">
+    @if (missionControl.connectionStatus() === 'offline') {
+      <button type="button" (click)="missionControl.connect()">Establish uplink</button>
+    } @else {
+      <button type="button" (click)="missionControl.disconnect()">Close uplink</button>
+    }
+  </div>
+
+  <div class="command-grid" aria-label="Mission command controls">
+    <button
+      type="button"
+      [disabled]="missionControl.connectionStatus() === 'offline'"
+      (click)="sendNavigationCommand()"
+    >
+      Confirm route
+    </button>
+    <button
+      type="button"
+      [disabled]="missionControl.connectionStatus() === 'offline'"
+      (click)="sendSystemsCheck()"
+    >
+      Run systems check
+    </button>
+    <button
+      class="clearance-button"
+      type="button"
+      [disabled]="missionControl.connectionStatus() === 'offline'"
+      (click)="sendLaunchClearance()"
+    >
+      Request launch clearance
+    </button>
+  </div>
+
+  <p class="transmission-count" aria-live="polite">
+    Commands transmitted: {{ missionControl.commandCount() }}
+  </p>
+</section>

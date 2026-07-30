@@ -227,4 +227,127 @@ describe('App', () => {
     await fixture.whenStable();
     expect(solution.textContent).toContain('Signal Systems Engineer badge earned');
   });
+
+  it('should render the services mission and its solution', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-mission-control-mission')).toBeTruthy();
+    expect(compiled.querySelector('app-mission-control-mission-solution')).toBeTruthy();
+    expect(compiled.textContent).toContain('Connect Mission Control');
+  });
+
+  it('should demonstrate an injected service controlling connection state', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const mission = fixture.nativeElement.querySelector(
+      'app-mission-control-mission',
+    ) as HTMLElement;
+    const connectButton = Array.from(mission.querySelectorAll('button')).find(
+      (button) => button.textContent?.trim() === 'Establish uplink',
+    );
+
+    connectButton?.click();
+    await fixture.whenStable();
+
+    expect(mission.querySelector('.connection')?.textContent).toContain('online');
+  });
+
+  it('should share service state between independent solution components', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const solution = fixture.nativeElement.querySelector(
+      'app-mission-control-mission-solution',
+    ) as HTMLElement;
+    const buttonWithText = (text: string) =>
+      Array.from(solution.querySelectorAll('button')).find(
+        (button) => button.textContent?.trim() === text,
+      );
+
+    buttonWithText('Establish uplink')?.click();
+    await fixture.whenStable();
+    buttonWithText('Confirm route')?.click();
+    await fixture.whenStable();
+
+    expect(solution.querySelector('.count')?.textContent).toContain('1 received');
+    expect(solution.querySelector('.log-list')?.textContent).toContain(
+      'Navigation route AX-19 confirmed',
+    );
+
+    buttonWithText('Clear transmission log')?.click();
+    await fixture.whenStable();
+    expect(solution.querySelector('.log-list')?.textContent).toContain('No commands received');
+
+    buttonWithText('Request launch clearance')?.click();
+    await fixture.whenStable();
+    expect(solution.querySelector('.badge-message')?.textContent).toContain(
+      'Dependency Navigator badge earned',
+    );
+  });
+
+  it('should render the Signal Forms mission and its solution', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-expedition-form-mission')).toBeTruthy();
+    expect(compiled.querySelector('app-expedition-form-mission-solution')).toBeTruthy();
+    expect(compiled.textContent).toContain('Register the Expedition');
+  });
+
+  it('should validate the working callsign field after it is touched', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const mission = fixture.nativeElement.querySelector(
+      'app-expedition-form-mission',
+    ) as HTMLElement;
+    const callsign = mission.querySelector('#student-callsign') as HTMLInputElement;
+
+    callsign.value = 'A';
+    callsign.dispatchEvent(new Event('input', { bubbles: true }));
+    callsign.dispatchEvent(new Event('blur'));
+    await fixture.whenStable();
+
+    expect(mission.querySelector('#student-callsign-errors')?.textContent).toContain(
+      'at least 3 characters',
+    );
+    expect(callsign.getAttribute('aria-invalid')).toBe('true');
+  });
+
+  it('should submit a valid expedition and award the forms badge', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const solution = fixture.nativeElement.querySelector(
+      'app-expedition-form-mission-solution',
+    ) as HTMLElement;
+
+    const setControlValue = (selector: string, value: string): void => {
+      const control = solution.querySelector(selector) as HTMLInputElement | HTMLSelectElement;
+      control.value = value;
+      control.dispatchEvent(new Event('input', { bubbles: true }));
+      control.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+
+    setControlValue('#solution-callsign', 'Aurora Prime');
+    setControlValue('#solution-email', 'ada@aurora.space');
+    setControlValue('#solution-destination', 'europa');
+    setControlValue('#solution-crew-size', '4');
+
+    const protocol = solution.querySelector('#solution-protocol') as HTMLInputElement;
+    protocol.checked = true;
+    protocol.dispatchEvent(new Event('input', { bubbles: true }));
+    protocol.dispatchEvent(new Event('change', { bubbles: true }));
+
+    const formElement = solution.querySelector('form') as HTMLFormElement;
+    formElement.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    await fixture.whenStable();
+
+    expect(solution.querySelector('.submission-status')?.textContent).toContain(
+      'Aurora Prime is cleared for europa',
+    );
+    expect(solution.querySelector('.badge-message')?.textContent).toContain(
+      'Form Systems Specialist badge earned',
+    );
+  });
 });
