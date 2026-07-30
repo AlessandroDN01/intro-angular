@@ -1,0 +1,95 @@
+<article class="reactor-card" aria-label="Completed Aurora reactor console">
+  <header class="reactor-header">
+    <div>
+      <p class="kicker">Engineering deck</p>
+      <h3>Reactor core R-04</h3>
+    </div>
+    <span class="pulse" aria-hidden="true"></span>
+  </header>
+
+  <section class="lesson-panel" aria-labelledby="solution-coolant-title">
+    <div class="panel-heading">
+      <div>
+        <p class="step">Working example · computed()</p>
+        <h4 id="solution-coolant-title">Coolant monitor</h4>
+      </div>
+      <strong>{{ coolantLevel() }}%</strong>
+    </div>
+
+    <p class="explanation">
+      Only <code>coolantLevel</code> is changed. Its computed status follows automatically.
+    </p>
+    <div class="button-group" aria-label="Coolant simulation controls">
+      <button type="button" (click)="setCoolantLevel(85)">Stable</button>
+      <button type="button" (click)="setCoolantLevel(45)">Low</button>
+      <button type="button" (click)="setCoolantLevel(15)">Critical</button>
+    </div>
+    <p class="system-reading" aria-live="polite">{{ coolantStatus() }}</p>
+  </section>
+
+  <section class="lesson-panel" aria-labelledby="solution-source-state-title">
+    <div class="panel-heading">
+      <div>
+        <p class="step">Source state · writable signals</p>
+        <h4 id="solution-source-state-title">Reactor controls</h4>
+      </div>
+    </div>
+
+    <dl class="source-grid">
+      <div>
+        <dt>Fuel</dt>
+        <dd>{{ fuelLevel() }}%</dd>
+      </div>
+      <div>
+        <dt>Coolant</dt>
+        <dd>{{ coolantLevel() }}%</dd>
+      </div>
+      <div>
+        <dt>Containment</dt>
+        <dd>{{ containmentStrength() }}%</dd>
+      </div>
+    </dl>
+
+    <div class="button-group preset-controls" aria-label="Reactor simulation presets">
+      <button type="button" (click)="loadStablePreset()">Stable preset</button>
+      <button type="button" (click)="loadUnstablePreset()">Unstable preset</button>
+      <button type="button" (click)="loadCriticalPreset()">Critical preset</button>
+    </div>
+  </section>
+
+  <section class="lesson-panel telemetry" aria-labelledby="solution-telemetry-title">
+    <div class="panel-heading">
+      <div>
+        <p class="step">Solved · computed derived state</p>
+        <h4 id="solution-telemetry-title">Calculated telemetry</h4>
+      </div>
+      <strong>{{ reactorOutput() }}%</strong>
+    </div>
+
+    <progress
+      [value]="reactorOutput()"
+      max="100"
+      [attr.aria-label]="'Reactor output: ' + reactorOutput() + '%'"
+    ></progress>
+    <p class="system-reading" aria-live="polite">{{ reactorStatus() }}</p>
+
+    <button
+      class="engage-button"
+      type="button"
+      [disabled]="!reactorReady()"
+      (click)="engageReactor()"
+    >
+      Engage reactor
+    </button>
+
+    <p class="ignition-status" aria-live="polite">
+      @if (reactorEngaged()) {
+        Reactor engaged — Signal Systems Engineer badge earned!
+      } @else if (reactorReady()) {
+        All derived readings agree. Reactor ready for ignition.
+      } @else {
+        Reactor unsafe. Load a stable configuration.
+      }
+    </p>
+  </section>
+</article>

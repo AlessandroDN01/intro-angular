@@ -129,4 +129,49 @@
       </details>
     </aside>
   </section>
+
+  <div class="level-divider" aria-hidden="true">
+    <span>Level 4 unlocked</span>
+  </div>
+
+  <header class="lesson-header level-two-header">
+    <p class="eyebrow">Angular Academy · Level 4</p>
+    <h1>Stabilize the Reactor</h1>
+    <p class="intro">
+      Separate the reactor's source controls from its calculated telemetry, then let computed
+      signals keep every system reading synchronized.
+    </p>
+  </header>
+
+  <section class="lesson-grid" aria-label="Computed signals lesson">
+    <div>
+      <div class="section-heading">
+        <span aria-hidden="true">01</span>
+        <div>
+          <p>Student mission</p>
+          <h2>Repair the reactor telemetry</h2>
+        </div>
+      </div>
+      <app-reactor-mission />
+    </div>
+
+    <aside>
+      <div class="section-heading">
+        <span aria-hidden="true">02</span>
+        <div>
+          <p>Self-study reference</p>
+          <h2>Compare with the solution</h2>
+        </div>
+      </div>
+
+      <details>
+        <summary>Reveal the stabilized reactor</summary>
+        <p class="hint">
+          Notice that the controls update only writable signals. The calculated output, status, and
+          readiness are never synchronized manually.
+        </p>
+        <app-reactor-mission-solution />
+      </details>
+    </aside>
+  </section>
 </main>

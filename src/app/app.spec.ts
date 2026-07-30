@@ -171,4 +171,60 @@ describe('App', () => {
       'Component Communicator badge earned',
     );
   });
+
+  it('should render the computed signals mission and its solution', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-reactor-mission')).toBeTruthy();
+    expect(compiled.querySelector('app-reactor-mission-solution')).toBeTruthy();
+    expect(compiled.textContent).toContain('Stabilize the Reactor');
+  });
+
+  it('should update the working coolant computed signal', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const mission = fixture.nativeElement.querySelector('app-reactor-mission') as HTMLElement;
+    const criticalButton = Array.from(mission.querySelectorAll('button')).find(
+      (button) => button.textContent?.trim() === 'Critical',
+    );
+
+    criticalButton?.click();
+    await fixture.whenStable();
+
+    expect(mission.textContent).toContain('Coolant failure imminent');
+  });
+
+  it('should derive every reactor state and unlock safe ignition', async () => {
+    const fixture = TestBed.createComponent(App);
+    await fixture.whenStable();
+    const solution = fixture.nativeElement.querySelector(
+      'app-reactor-mission-solution',
+    ) as HTMLElement;
+    const buttonWithText = (text: string) =>
+      Array.from(solution.querySelectorAll('button')).find(
+        (button) => button.textContent?.trim() === text,
+      );
+    const engageButton = solution.querySelector('.engage-button') as HTMLButtonElement;
+
+    buttonWithText('Unstable preset')?.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Reactor unstable');
+    expect(engageButton.disabled).toBe(true);
+
+    buttonWithText('Critical preset')?.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Critical reactor failure');
+    expect(engageButton.disabled).toBe(true);
+
+    buttonWithText('Stable preset')?.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Reactor stable');
+    expect(engageButton.disabled).toBe(false);
+
+    engageButton.click();
+    await fixture.whenStable();
+    expect(solution.textContent).toContain('Signal Systems Engineer badge earned');
+  });
 });

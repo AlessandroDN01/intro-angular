@@ -186,6 +186,36 @@ The complete `profileViewed` channel is the working output example. Students
 bind role and availability inputs, connect the assignment click, emit the crew
 ID, listen for the event in the parent, and update the assignment signal.
 
+### Level 4: Stabilize the Reactor
+
+Badge: **Signal Systems Engineer**
+
+Student files:
+
+- `src/app/reactor-mission/reactor-mission.ts`
+- `src/app/reactor-mission/reactor-mission.html`
+- `src/app/reactor-mission/reactor-mission.css`
+
+Solution files:
+
+- `src/app/reactor-mission-solution/reactor-mission-solution.ts`
+- `src/app/reactor-mission-solution/reactor-mission-solution.html`
+
+Concepts:
+
+- Writable signals as source state
+- `computed()` signals as derived state
+- Automatic dependency tracking and recalculation
+- Pure calculations derived from multiple signals
+- Numeric, textual, and boolean computed values
+- Using computed values in interpolation, attributes, and property bindings
+- Avoiding duplicated state and manual synchronization
+
+The coolant monitor is the complete computed-signal example. Students derive
+reactor output, status, and readiness, then bind readiness to the ignition
+control. The solution provides stable, unstable, and critical presets so every
+derived state can be observed.
+
 ## Current application structure
 
 `src/app/app.html` presents all levels sequentially. Each student mission appears
@@ -196,9 +226,9 @@ The custom Aurora spaceship asset is:
 
 - `public/aurora-ship.svg`
 
-At the time this document was created:
+Current validation baseline:
 
-- 11 unit tests pass.
+- 14 unit tests pass.
 - Strict TypeScript compilation passes.
 - The Angular production build passes.
 - The project uses NVM Node `24.18.0`; load NVM and run `nvm use 24` when a shell
@@ -217,19 +247,6 @@ npm run build
 
 The roadmap is a direction, not a rigid commitment. Discuss the next lesson with
 the teacher before implementing it.
-
-### Level 4: Stabilize the Reactor
-
-Primary concept: derived state with `computed()`.
-
-Possible mission:
-
-- Store reactor inputs as writable signals.
-- Derive total output, stability, readiness, and warning text with `computed()`.
-- Demonstrate that derived values should not be manually synchronized.
-- Let students repair computed reactor efficiency and launch-readiness values.
-
-Possible badge: **Signal Systems Engineer**
 
 ### Level 5: Connect Mission Control
 
