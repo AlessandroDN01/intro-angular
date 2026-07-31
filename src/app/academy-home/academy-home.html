@@ -1,0 +1,17 @@
+<section class="academy-home">
+  <header>
+    <p class="eyebrow">Aurora training program</p>
+    <h1 data-route-heading tabindex="-1">Angular Academy</h1>
+    <p>Choose a mission sector. Each lesson is lazy-loaded only when its route is activated.</p>
+  </header>
+
+  <div class="lesson-list">
+    @for (lesson of lessons; track lesson.level) {
+      <a [routerLink]="['/lesson', lesson.level]">
+        <span>Level {{ lesson.level }}</span>
+        <strong>{{ lesson.title }}</strong>
+        <small>{{ lesson.topic }}</small>
+      </a>
+    }
+  </div>
+</section>

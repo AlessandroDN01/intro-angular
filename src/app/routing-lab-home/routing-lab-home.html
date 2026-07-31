@@ -1,0 +1,33 @@
+<section class="route-screen">
+  <p class="eyebrow">Student navigation lab</p>
+  <h1 data-route-heading tabindex="-1">Galaxy route map</h1>
+  <p>The academy route works. Repair the sector coordinates next.</p>
+
+  <nav aria-label="Student sector routes">
+    <a
+      routerLink="/routing-lab"
+      routerLinkActive="active-route"
+      ariaCurrentWhenActive="page"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Route map
+    </a>
+
+    <!-- TODO 1: Replace href with [routerLink]="['/routing-lab/sector', 'europa']". -->
+    <!-- TODO 2: Add routerLinkActive and ariaCurrentWhenActive. -->
+    <a href="#europa-disconnected">Europa · disconnected</a>
+
+    <!-- Repeat the working solution for Titan. -->
+    <a href="#titan-disconnected">Titan · disconnected</a>
+  </nav>
+
+  <div class="status-panel">
+    <strong>Routing home uses an eager component route</strong>
+    <p>
+      Its normal TypeScript import is downloaded in the initial bundle, but Angular creates this
+      component only when the route becomes active.
+    </p>
+  </div>
+
+  <a class="return-link" routerLink="/lesson/7">Return to Level 7</a>
+</section>

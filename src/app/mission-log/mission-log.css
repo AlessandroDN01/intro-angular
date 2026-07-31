@@ -1,0 +1,101 @@
+:host {
+  display: block;
+}
+
+.log-panel {
+  padding: 1rem;
+  border: 1px solid #33475d;
+  border-radius: 0.7rem;
+  background: #111d2a;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.step {
+  margin: 0;
+  color: #78e8ce;
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+h4 {
+  margin: 0.15rem 0 0;
+  color: #f6f8fb;
+}
+
+.count {
+  color: #f7c75f;
+  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+}
+
+.log-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.8rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.log-entry,
+.empty-log {
+  margin: 0;
+  padding: 0.7rem;
+  border-left: 3px solid #78e8ce;
+  background: #0b1622;
+  color: #dbe5ef;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.log-entry span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: #8fa1b5;
+  font-family: ui-monospace, monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.empty-log {
+  margin-block: 0.8rem;
+  border-color: #66798c;
+  color: #9cacbd;
+}
+
+button {
+  width: 100%;
+  min-height: 2.7rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #50687f;
+  border-radius: 0.45rem;
+  background: #142536;
+  color: #e6edf5;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: #78e8ce;
+}
+
+button:focus-visible {
+  outline: 3px solid #78e8ce;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  border-color: #405266;
+  background: #34475a;
+  color: #9cacbd;
+  cursor: not-allowed;
+}

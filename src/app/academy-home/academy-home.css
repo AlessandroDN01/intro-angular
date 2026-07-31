@@ -1,0 +1,83 @@
+:host {
+  display: block;
+}
+
+.academy-home {
+  width: min(980px, calc(100% - 2rem));
+  margin-inline: auto;
+  padding: 5rem 0;
+}
+
+header {
+  max-width: 720px;
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #78e8ce;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0.35rem 0 1rem;
+  color: #fff;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+h1:focus {
+  outline: none;
+}
+
+header > p:last-child {
+  color: #b8c6d9;
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+.lesson-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0.8rem;
+}
+
+.lesson-list a {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1.2rem;
+  border: 1px solid #33475d;
+  border-radius: 0.7rem;
+  background: #111d2a;
+  color: #f6f8fb;
+  text-decoration: none;
+}
+
+.lesson-list a:hover {
+  border-color: #78e8ce;
+  transform: translateY(-2px);
+}
+
+.lesson-list a:focus-visible {
+  outline: 3px solid #78e8ce;
+  outline-offset: 3px;
+}
+
+.lesson-list span {
+  color: #f7c75f;
+  font-size: 0.7rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.lesson-list strong {
+  font-size: 1rem;
+}
+
+.lesson-list small {
+  color: #9cacbd;
+}

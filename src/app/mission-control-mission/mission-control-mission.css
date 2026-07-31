@@ -1,0 +1,105 @@
+:host {
+  display: block;
+}
+
+.mission-card {
+  overflow: hidden;
+  border: 1px solid #33475d;
+  border-radius: 1rem;
+  background: #0b1622;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 25%);
+}
+
+.mission-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-bottom: 1px solid #33475d;
+  background: linear-gradient(135deg, rgb(120 232 206 / 10%), transparent 55%), #111d2a;
+}
+
+.kicker {
+  margin: 0;
+  color: #78e8ce;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+h3 {
+  margin: 0.2rem 0 0;
+  color: #f6f8fb;
+  font-size: 1.5rem;
+}
+
+.frequency {
+  color: #f7c75f;
+  font-family: ui-monospace, monospace;
+  font-size: 0.78rem;
+}
+
+.architecture-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.85rem;
+  border-bottom: 1px solid #26394d;
+  color: #9cacbd;
+  font-size: 0.72rem;
+  text-align: center;
+}
+
+.architecture-note strong {
+  color: #b7f8e8;
+}
+
+.terminal-stack {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.objectives {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 1.2rem;
+  border-top: 1px solid #33475d;
+  background: #07111d;
+  color: #cbd5e1;
+  list-style: none;
+}
+
+.objectives li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: baseline;
+}
+
+.objectives span {
+  color: #f7c75f;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.badge-message {
+  margin: 0;
+  padding: 1rem;
+  border-top: 1px solid #33475d;
+  background: #102b2a;
+  color: #b7f8e8;
+  font-weight: 750;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 440px) {
+  .architecture-note {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

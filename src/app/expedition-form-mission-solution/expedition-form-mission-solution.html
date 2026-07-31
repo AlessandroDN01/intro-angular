@@ -1,0 +1,165 @@
+<article class="form-card" aria-label="Completed Aurora expedition registration">
+  <header class="form-header">
+    <div>
+      <p class="kicker">Departure authorization</p>
+      <h3>Expedition registry</h3>
+    </div>
+    <span class="record-id">FORM A-06</span>
+  </header>
+
+  <div class="model-map" aria-label="Signal Forms data flow">
+    <span>Typed model</span>
+    <span aria-hidden="true">→</span>
+    <strong>Field tree</strong>
+    <span aria-hidden="true">→</span>
+    <span>HTML controls</span>
+  </div>
+
+  <form novalidate (submit)="registerExpedition($event)">
+    <fieldset>
+      <legend>Vessel identity</legend>
+
+      <div class="field">
+        <label for="solution-callsign">Expedition callsign</label>
+        <input
+          id="solution-callsign"
+          type="text"
+          autocomplete="off"
+          [formField]="registrationForm.callsign"
+          [attr.aria-invalid]="
+            registrationForm.callsign().touched() && registrationForm.callsign().invalid()
+              ? 'true'
+              : null
+          "
+          aria-describedby="solution-callsign-errors"
+        />
+        <div id="solution-callsign-errors" class="errors" aria-live="polite">
+          @if (registrationForm.callsign().touched() && registrationForm.callsign().invalid()) {
+            @for (error of registrationForm.callsign().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          }
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Mission details</legend>
+
+      <div class="field">
+        <label for="solution-email">Commander email</label>
+        <input
+          id="solution-email"
+          type="email"
+          autocomplete="email"
+          [formField]="registrationForm.commanderEmail"
+          [attr.aria-invalid]="
+            registrationForm.commanderEmail().touched() &&
+            registrationForm.commanderEmail().invalid()
+              ? 'true'
+              : null
+          "
+          aria-describedby="solution-email-errors"
+        />
+        <div id="solution-email-errors" class="errors" aria-live="polite">
+          @if (
+            registrationForm.commanderEmail().touched() &&
+            registrationForm.commanderEmail().invalid()
+          ) {
+            @for (error of registrationForm.commanderEmail().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="solution-destination">Destination</label>
+        <select
+          id="solution-destination"
+          [formField]="registrationForm.destination"
+          [attr.aria-invalid]="
+            registrationForm.destination().touched() && registrationForm.destination().invalid()
+              ? 'true'
+              : null
+          "
+          aria-describedby="solution-destination-errors"
+        >
+          <option value="">Select a destination</option>
+          <option value="europa">Europa Research Station</option>
+          <option value="titan">Titan Orbital Colony</option>
+          <option value="kepler-186f">Kepler-186f Expedition</option>
+        </select>
+        <div id="solution-destination-errors" class="errors" aria-live="polite">
+          @if (
+            registrationForm.destination().touched() && registrationForm.destination().invalid()
+          ) {
+            @for (error of registrationForm.destination().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="solution-crew-size">Crew size</label>
+        <input
+          id="solution-crew-size"
+          type="number"
+          [formField]="registrationForm.crewSize"
+          [attr.aria-invalid]="
+            registrationForm.crewSize().touched() && registrationForm.crewSize().invalid()
+              ? 'true'
+              : null
+          "
+          aria-describedby="solution-crew-errors"
+        />
+        <div id="solution-crew-errors" class="errors" aria-live="polite">
+          @if (registrationForm.crewSize().touched() && registrationForm.crewSize().invalid()) {
+            @for (error of registrationForm.crewSize().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="field checkbox-field">
+        <input
+          id="solution-protocol"
+          type="checkbox"
+          [formField]="registrationForm.acceptsSafetyProtocol"
+          [attr.aria-invalid]="
+            registrationForm.acceptsSafetyProtocol().touched() &&
+            registrationForm.acceptsSafetyProtocol().invalid()
+              ? 'true'
+              : null
+          "
+          aria-describedby="solution-protocol-errors"
+        />
+        <label for="solution-protocol">I accept the Aurora safety protocol</label>
+        <div id="solution-protocol-errors" class="errors" aria-live="polite">
+          @if (
+            registrationForm.acceptsSafetyProtocol().touched() &&
+            registrationForm.acceptsSafetyProtocol().invalid()
+          ) {
+            @for (error of registrationForm.acceptsSafetyProtocol().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          }
+        </div>
+      </div>
+    </fieldset>
+
+    <button class="submit-button" type="submit" [disabled]="registrationForm().submitting()">
+      Register expedition
+    </button>
+  </form>
+
+  <p class="submission-status" aria-live="polite">{{ registrationStatus() }}</p>
+
+  @if (registrationComplete()) {
+    <p class="badge-message" aria-live="polite">
+      Expedition registered — Form Systems Specialist badge earned!
+    </p>
+  }
+</article>

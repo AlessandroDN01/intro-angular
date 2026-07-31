@@ -1,0 +1,28 @@
+<section class="log-panel" aria-labelledby="solution-mission-log-title">
+  <div class="panel-heading">
+    <div>
+      <p class="step">Solved · shared service consumer</p>
+      <h4 id="solution-mission-log-title">Receiving terminal</h4>
+    </div>
+    <span class="count">{{ missionControl.commandCount() }} received</span>
+  </div>
+
+  <ul class="log-list" aria-live="polite">
+    @for (entry of missionControl.logEntries(); track entry.id) {
+      <li class="log-entry">
+        <span>Transmission {{ entry.id }} · {{ entry.type }}</span>
+        {{ entry.message }}
+      </li>
+    } @empty {
+      <li class="empty-log">No commands received.</li>
+    }
+  </ul>
+
+  <button
+    type="button"
+    [disabled]="missionControl.commandCount() === 0"
+    (click)="missionControl.clearLog()"
+  >
+    Clear transmission log
+  </button>
+</section>

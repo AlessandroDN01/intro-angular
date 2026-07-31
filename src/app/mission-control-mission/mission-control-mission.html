@@ -1,0 +1,30 @@
+<article class="mission-card" aria-label="Mission Control communication training">
+  <header class="mission-header">
+    <div>
+      <p class="kicker">Deep-space communications</p>
+      <h3>Aurora uplink network</h3>
+    </div>
+    <span class="frequency">127.4 MHz</span>
+  </header>
+
+  <div class="architecture-note" aria-label="Service communication architecture">
+    <span>Command component</span>
+    <span aria-hidden="true">→</span>
+    <strong>Shared service</strong>
+    <span aria-hidden="true">→</span>
+    <span>Log component</span>
+  </div>
+
+  <div class="terminal-stack">
+    <app-mission-command-panel />
+    <app-mission-log />
+  </div>
+
+  <ol class="objectives" aria-label="Mission Control objectives">
+    <li><span>01</span> Inject the service into the log</li>
+    <li><span>02</span> Add commands to private service state</li>
+    <li><span>03</span> Render shared entries in another component</li>
+    <li><span>04</span> Connect the clear-log operation</li>
+    <li><span>05</span> Receive launch clearance</li>
+  </ol>
+</article>

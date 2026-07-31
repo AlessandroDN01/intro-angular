@@ -1,0 +1,106 @@
+<article class="form-card" aria-label="Aurora expedition registration training">
+  <header class="form-header">
+    <div>
+      <p class="kicker">Departure authorization</p>
+      <h3>Expedition registry</h3>
+    </div>
+    <span class="record-id">FORM A-06</span>
+  </header>
+
+  <div class="model-map" aria-label="Signal Forms data flow">
+    <span>Typed model</span>
+    <span aria-hidden="true">→</span>
+    <strong>Field tree</strong>
+    <span aria-hidden="true">→</span>
+    <span>HTML controls</span>
+  </div>
+
+  <form novalidate (submit)="registerExpedition($event)">
+    <fieldset>
+      <legend>Vessel identity</legend>
+
+      <div class="field">
+        <div class="field-heading">
+          <label for="student-callsign">Expedition callsign</label>
+          <span>Working example</span>
+        </div>
+        <input
+          id="student-callsign"
+          type="text"
+          autocomplete="off"
+          [formField]="registrationForm.callsign"
+          [attr.aria-invalid]="
+            registrationForm.callsign().touched() && registrationForm.callsign().invalid()
+              ? 'true'
+              : null
+          "
+          aria-describedby="student-callsign-help student-callsign-errors"
+        />
+        <p id="student-callsign-help" class="help">
+          The formField directive synchronizes this control with the typed model.
+        </p>
+
+        <div id="student-callsign-errors" class="errors" aria-live="polite">
+          @if (registrationForm.callsign().touched() && registrationForm.callsign().invalid()) {
+            @for (error of registrationForm.callsign().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          }
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Mission details</legend>
+
+      <div class="field">
+        <label for="student-email">Commander email</label>
+        <!-- TODO 1: Bind registrationForm.commanderEmail with [formField]. -->
+        <input
+          id="student-email"
+          type="email"
+          autocomplete="email"
+          placeholder="commander@aurora.space"
+        />
+        <!-- TODO 3: Display touched commanderEmail validation errors. -->
+      </div>
+
+      <div class="field">
+        <label for="student-destination">Destination</label>
+        <!-- TODO 4: Bind registrationForm.destination with [formField]. -->
+        <select id="student-destination">
+          <option value="">Select a destination</option>
+          <option value="europa">Europa Research Station</option>
+          <option value="titan">Titan Orbital Colony</option>
+          <option value="kepler-186f">Kepler-186f Expedition</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="student-crew-size">Crew size</label>
+        <!-- TODO 5: Bind registrationForm.crewSize with [formField]. -->
+        <input id="student-crew-size" type="number" value="1" />
+        <!-- TODO 7: Display touched crewSize validation errors. -->
+      </div>
+
+      <div class="field checkbox-field">
+        <!-- TODO 8: Bind the checkbox to acceptsSafetyProtocol. -->
+        <input id="student-protocol" type="checkbox" />
+        <label for="student-protocol">I accept the Aurora safety protocol</label>
+      </div>
+    </fieldset>
+
+    <button class="submit-button" type="submit" [disabled]="registrationForm().submitting()">
+      Register expedition
+    </button>
+  </form>
+
+  <p class="submission-status" aria-live="polite">{{ registrationStatus() }}</p>
+
+  <ol class="objectives" aria-label="Expedition registration objectives">
+    <li><span>01</span> Connect every field-tree node</li>
+    <li><span>02</span> Add type-safe schema validation</li>
+    <li><span>03</span> Display accessible field errors</li>
+    <li><span>04</span> Submit the validated model</li>
+  </ol>
+</article>

@@ -1,177 +1,32 @@
-<main>
-  <header class="lesson-header">
-    <p class="eyebrow">Angular Academy · Level 1</p>
-    <h1>Awaken the Aurora</h1>
-    <p class="intro">
-      Learn how a component's TypeScript data reaches its HTML template, then repair the ship's
-      control panel.
-    </p>
-  </header>
+<a class="skip-link" href="#lesson-content">Skip to lesson content</a>
 
-  <section class="lesson-grid" aria-label="Component binding lesson">
-    <div>
-      <div class="section-heading">
-        <span aria-hidden="true">01</span>
-        <div>
-          <p>Student mission</p>
-          <h2>Repair the control panel</h2>
-        </div>
-      </div>
-      <app-component-mission />
-    </div>
+<header class="app-header">
+  <a class="brand" routerLink="/academy">
+    <span aria-hidden="true">△</span>
+    Angular Academy
+  </a>
 
-    <aside>
-      <div class="section-heading">
-        <span aria-hidden="true">02</span>
-        <div>
-          <p>Self-study reference</p>
-          <h2>Compare with the solution</h2>
-        </div>
-      </div>
+  <nav aria-label="Academy lessons">
+    <a
+      routerLink="/academy"
+      routerLinkActive="active-link"
+      ariaCurrentWhenActive="page"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Home
+    </a>
+    @for (level of [1, 2, 3, 4, 5, 6, 7, 8]; track level) {
+      <a
+        [routerLink]="['/lesson', level]"
+        routerLinkActive="active-link"
+        ariaCurrentWhenActive="page"
+      >
+        L{{ level }}
+      </a>
+    }
+  </nav>
+</header>
 
-      <details>
-        <summary>Reveal the completed mission</summary>
-        <p class="hint">
-          Try every TODO first. Then compare the HTML and TypeScript files with this working
-          version.
-        </p>
-        <app-component-mission-solution />
-      </details>
-    </aside>
-  </section>
-
-  <div class="level-divider" aria-hidden="true">
-    <span>Level 2 unlocked</span>
-  </div>
-
-  <header class="lesson-header level-two-header">
-    <p class="eyebrow">Angular Academy · Level 2</p>
-    <h1>Navigate the Asteroid Field</h1>
-    <p class="intro">
-      Use Angular's native control flow to decide what the navigation console displays and to render
-      every object detected by the Aurora's scanner.
-    </p>
-  </header>
-
-  <section class="lesson-grid" aria-label="Control flow lesson">
-    <div>
-      <div class="section-heading">
-        <span aria-hidden="true">01</span>
-        <div>
-          <p>Student mission</p>
-          <h2>Restore the navigation systems</h2>
-        </div>
-      </div>
-      <app-control-flow-mission />
-    </div>
-
-    <aside>
-      <div class="section-heading">
-        <span aria-hidden="true">02</span>
-        <div>
-          <p>Self-study reference</p>
-          <h2>Compare with the solution</h2>
-        </div>
-      </div>
-
-      <details>
-        <summary>Reveal the completed navigation console</summary>
-        <p class="hint">
-          Test safe, warning, and danger states before opening the solution. Remember that each
-          asteroid's ID is its tracking identity.
-        </p>
-        <app-control-flow-mission-solution />
-      </details>
-    </aside>
-  </section>
-
-  <div class="level-divider" aria-hidden="true">
-    <span>Level 3 unlocked</span>
-  </div>
-
-  <header class="lesson-header level-two-header">
-    <p class="eyebrow">Angular Academy · Level 3</p>
-    <h1>Assemble the Flight Crew</h1>
-    <p class="intro">
-      Build a reusable crew card, send data into it with signal inputs, and report the pilot's
-      actions back to the parent with outputs.
-    </p>
-  </header>
-
-  <section class="lesson-grid" aria-label="Component communication lesson">
-    <div>
-      <div class="section-heading">
-        <span aria-hidden="true">01</span>
-        <div>
-          <p>Student mission</p>
-          <h2>Reconnect the crew terminal</h2>
-        </div>
-      </div>
-      <app-crew-mission />
-    </div>
-
-    <aside>
-      <div class="section-heading">
-        <span aria-hidden="true">02</span>
-        <div>
-          <p>Self-study reference</p>
-          <h2>Compare with the solution</h2>
-        </div>
-      </div>
-
-      <details>
-        <summary>Reveal the completed crew terminal</summary>
-        <p class="hint">
-          Follow one crew member's data from the parent into the card, then trace the assignment
-          event from the card back to the parent.
-        </p>
-        <app-crew-mission-solution />
-      </details>
-    </aside>
-  </section>
-
-  <div class="level-divider" aria-hidden="true">
-    <span>Level 4 unlocked</span>
-  </div>
-
-  <header class="lesson-header level-two-header">
-    <p class="eyebrow">Angular Academy · Level 4</p>
-    <h1>Stabilize the Reactor</h1>
-    <p class="intro">
-      Separate the reactor's source controls from its calculated telemetry, then let computed
-      signals keep every system reading synchronized.
-    </p>
-  </header>
-
-  <section class="lesson-grid" aria-label="Computed signals lesson">
-    <div>
-      <div class="section-heading">
-        <span aria-hidden="true">01</span>
-        <div>
-          <p>Student mission</p>
-          <h2>Repair the reactor telemetry</h2>
-        </div>
-      </div>
-      <app-reactor-mission />
-    </div>
-
-    <aside>
-      <div class="section-heading">
-        <span aria-hidden="true">02</span>
-        <div>
-          <p>Self-study reference</p>
-          <h2>Compare with the solution</h2>
-        </div>
-      </div>
-
-      <details>
-        <summary>Reveal the stabilized reactor</summary>
-        <p class="hint">
-          Notice that the controls update only writable signals. The calculated output, status, and
-          readiness are never synchronized manually.
-        </p>
-        <app-reactor-mission-solution />
-      </details>
-    </aside>
-  </section>
+<main id="lesson-content">
+  <router-outlet (activate)="focusRouteHeading()" />
 </main>

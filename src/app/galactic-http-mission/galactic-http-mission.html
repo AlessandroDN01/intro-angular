@@ -1,0 +1,146 @@
+<article class="comms-card" aria-label="Galactic HTTP communications training">
+  <header class="comms-header">
+    <div>
+      <p class="kicker">Aurora communications array</p>
+      <h3>Galactic data link</h3>
+    </div>
+    <span class="channel-id">HTTP · L8</span>
+  </header>
+
+  <section class="scanner" aria-labelledby="student-resource-title">
+    <div class="section-title">
+      <div>
+        <span>Working example 01</span>
+        <h4 id="student-resource-title">Reactive GET · httpResource</h4>
+      </div>
+      <code>eager + signal-driven</code>
+    </div>
+
+    <label for="student-character">Archive target</label>
+    <select id="student-character" [value]="characterId()" (change)="selectCharacter($event)">
+      <option value="1">Record 1 · Luke Skywalker</option>
+      <option value="4">Record 4 · Darth Vader</option>
+      <option value="9999">Missing record · test the error</option>
+    </select>
+
+    <div class="result-panel" aria-live="polite">
+      @if (reactiveCharacter.hasValue()) {
+        <dl>
+          <div>
+            <dt>Name</dt>
+            <dd>{{ reactiveCharacter.value().name }}</dd>
+          </div>
+          <div>
+            <dt>Birth year</dt>
+            <dd>{{ reactiveCharacter.value().birth_year }}</dd>
+          </div>
+          <div>
+            <dt>Eye color</dt>
+            <dd>{{ reactiveCharacter.value().eye_color }}</dd>
+          </div>
+        </dl>
+      } @else if (reactiveCharacter.error()) {
+        <p class="error" role="alert">Record unavailable. The server returned an error.</p>
+        <button type="button" class="secondary-button" (click)="reactiveCharacter.reload()">
+          Retry reactive GET
+        </button>
+      } @else if (reactiveCharacter.isLoading()) {
+        <p role="status">Receiving archive record…</p>
+      }
+    </div>
+  </section>
+
+  <section class="scanner" aria-labelledby="student-classic-title">
+    <div class="section-title">
+      <div>
+        <span>Working example 02</span>
+        <h4 id="student-classic-title">Classic GET · HttpClient</h4>
+      </div>
+      <code>cold Observable + AsyncPipe</code>
+    </div>
+
+    <div class="result-panel" aria-live="polite">
+      @if (classicCharacter$ | async; as character) {
+        <p class="success">AsyncPipe subscribed and received {{ character.name }}.</p>
+        <p>Height recorded by SWAPI: {{ character.height }} cm.</p>
+      } @else if (classicError()) {
+        <p class="error" role="alert">{{ classicError() }}</p>
+      } @else if (classicLoading()) {
+        <p role="status">AsyncPipe subscribed — classic GET in progress…</p>
+      }
+    </div>
+  </section>
+
+  <section class="transmitter" aria-labelledby="student-post-title">
+    <div class="section-title">
+      <div>
+        <span>Student challenge</span>
+        <h4 id="student-post-title">POST a Signal Form report</h4>
+      </div>
+      <code>user action → mutation</code>
+    </div>
+
+    <form novalidate (submit)="transmitReport($event)">
+      <div class="field">
+        <div class="field-heading">
+          <label for="student-officer">Communications officer</label>
+          <span>Working form example</span>
+        </div>
+        <input
+          id="student-officer"
+          type="text"
+          autocomplete="name"
+          [formField]="reportForm.officerName"
+          [attr.aria-invalid]="
+            reportForm.officerName().touched() && reportForm.officerName().invalid() ? 'true' : null
+          "
+          aria-describedby="student-officer-errors"
+        />
+        <div id="student-officer-errors" class="errors" aria-live="polite">
+          @if (reportForm.officerName().touched() && reportForm.officerName().invalid()) {
+            @for (error of reportForm.officerName().errors(); track error.kind) {
+              <p>{{ error.message }}</p>
+            }
+          }
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="student-report-title">Report title</label>
+        <!-- TODO 1: Bind reportForm.reportTitle with [formField]. -->
+        <input id="student-report-title" type="text" autocomplete="off" />
+        <!-- TODO 3: Display accessible touched validation errors. -->
+      </div>
+
+      <div class="field">
+        <label for="student-message">Transmission message</label>
+        <!-- TODO 4: Bind reportForm.message with [formField]. -->
+        <textarea id="student-message" rows="4"></textarea>
+        <!-- TODO 6: Display accessible touched validation errors. -->
+      </div>
+
+      <div class="field">
+        <label for="student-priority">Priority</label>
+        <!-- TODO 7: Bind reportForm.priority with [formField]. -->
+        <select id="student-priority">
+          <option value="routine">Routine</option>
+          <option value="important">Important</option>
+          <option value="critical">Critical</option>
+        </select>
+      </div>
+
+      <button class="transmit-button" type="submit" [disabled]="reportForm().submitting()">
+        Transmit mission report
+      </button>
+    </form>
+
+    <p class="transmission-status" aria-live="polite">{{ transmissionStatus() }}</p>
+  </section>
+
+  <ol class="objectives" aria-label="Galactic communications objectives">
+    <li><span>01</span> Compare reactive and classic GET requests</li>
+    <li><span>02</span> Connect and validate the Signal Form</li>
+    <li><span>03</span> Build a typed POST body</li>
+    <li><span>04</span> Handle sending, success, and failure</li>
+  </ol>
+</article>

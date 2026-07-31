@@ -1,0 +1,104 @@
+:host {
+  display: block;
+}
+
+.command-panel {
+  padding: 1rem;
+  border: 1px solid #33475d;
+  border-radius: 0.7rem;
+  background: #111d2a;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.step {
+  margin: 0;
+  color: #78e8ce;
+  font-size: 0.66rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+h4 {
+  margin: 0.15rem 0 0;
+  color: #f6f8fb;
+}
+
+.connection {
+  color: #ff9ba0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.connection.online {
+  color: #78e8ce;
+}
+
+.explanation,
+.transmission-count {
+  margin: 0.7rem 0;
+  color: #b8c6d9;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.button-group,
+.command-grid {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.button-group {
+  margin-bottom: 0.7rem;
+}
+
+.command-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.clearance-button {
+  grid-column: 1 / -1;
+}
+
+button {
+  min-height: 2.7rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #50687f;
+  border-radius: 0.45rem;
+  background: #142536;
+  color: #e6edf5;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: #78e8ce;
+}
+
+button:focus-visible {
+  outline: 3px solid #78e8ce;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  border-color: #405266;
+  background: #34475a;
+  color: #9cacbd;
+  cursor: not-allowed;
+}
+
+.transmission-count {
+  min-height: 1.4em;
+  margin-bottom: 0;
+  color: #b7f8e8;
+  text-align: center;
+}
