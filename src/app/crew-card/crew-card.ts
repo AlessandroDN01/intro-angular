@@ -26,5 +26,6 @@ export class CrewCard {
 
   protected requestAssignment(): void {
     // TODO 5: Emit memberId through the assigned output.
+    this.assigned.emit(this.memberId());
   }
 }

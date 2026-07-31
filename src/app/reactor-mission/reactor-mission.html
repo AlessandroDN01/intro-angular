@@ -78,7 +78,7 @@
       TODO 4: Replace the static disabled attribute with:
       [disabled]="!reactorReady()"
     -->
-    <button class="engage-button" type="button" disabled (click)="engageReactor()">
+    <button class="engage-button" type="button" [disabled]="!reactorReady()" (click)="engageReactor()">
       Engage reactor
     </button>
 

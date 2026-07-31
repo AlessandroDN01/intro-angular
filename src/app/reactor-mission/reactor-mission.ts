@@ -27,17 +27,23 @@ export class ReactorMission {
 
   protected readonly reactorOutput = computed(() => {
     // TODO 1: Return the rounded average of the three source levels.
-    return 0;
+    return Math.round((this.fuelLevel() + this.coolantLevel() + this.containmentStrength()) / 3);
   });
 
   protected readonly reactorStatus = computed(() => {
     // TODO 2: Derive stable, unstable, or critical from reactorOutput().
-    return 'Stability telemetry disconnected';
+    if (this.reactorOutput() >= 70) {
+      return 'Reactor stable';
+    }
+    if (this.reactorOutput() >= 50) {
+      return 'Reactor unstable';
+    }
+    return 'Reactor critical';
   });
 
   protected readonly reactorReady = computed(() => {
     // TODO 3: Require output >= 70, coolant >= 50, and containment >= 60.
-    return false;
+    return this.reactorOutput() >= 70 && this.coolantLevel() >= 50 && this.containmentStrength() >= 60;
   });
 
   protected setCoolantLevel(level: number): void {
