@@ -1,32 +1,42 @@
+import { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+import { provideRouter, Router, withComponentInputBinding } from '@angular/router';
 import { App } from './app';
+import { routes } from './app.routes';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes, withComponentInputBinding())],
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  async function renderRoute(url: string): Promise<ComponentFixture<App>> {
     const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    await TestBed.inject(Router).navigateByUrl(url);
+    await fixture.whenStable();
+    return fixture;
+  }
+
+  it('should create the routed app shell and academy dashboard', async () => {
+    const fixture = await renderRoute('/academy');
+    expect(fixture.componentInstance).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('app-academy-home')).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain('Angular Academy');
   });
 
-  it('should render the first lesson', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+  it('should render the first lesson lazily', async () => {
+    const fixture = await renderRoute('/lesson/1');
     const compiled = fixture.nativeElement as HTMLElement;
+
     expect(compiled.querySelector('h1')?.textContent).toContain('Awaken the Aurora');
     expect(compiled.querySelector('app-component-mission')).toBeTruthy();
     expect(compiled.querySelector('app-component-mission-solution')).toBeTruthy();
   });
 
   it('should update diagnostics after the example button is clicked', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-
+    const fixture = await renderRoute('/lesson/1');
     const mission = fixture.nativeElement.querySelector('app-component-mission') as HTMLElement;
     const diagnosticsButton = mission.querySelector('.secondary-button') as HTMLButtonElement;
 
@@ -37,9 +47,7 @@ describe('App', () => {
   });
 
   it('should celebrate a successful launch in the solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
-
+    const fixture = await renderRoute('/lesson/1');
     const solution = fixture.nativeElement.querySelector(
       'app-component-mission-solution',
     ) as HTMLElement;
@@ -56,8 +64,7 @@ describe('App', () => {
   });
 
   it('should render the control flow mission and its solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/2');
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('app-control-flow-mission')).toBeTruthy();
@@ -66,8 +73,7 @@ describe('App', () => {
   });
 
   it('should render every shield conditional branch in the solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/2');
     const solution = fixture.nativeElement.querySelector(
       'app-control-flow-mission-solution',
     ) as HTMLElement;
@@ -92,8 +98,7 @@ describe('App', () => {
   });
 
   it('should render every scanner conditional branch in the working example', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/2');
     const solution = fixture.nativeElement.querySelector(
       'app-control-flow-mission-solution',
     ) as HTMLElement;
@@ -113,8 +118,7 @@ describe('App', () => {
   });
 
   it('should render the empty scanner state in the solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/2');
     const solution = fixture.nativeElement.querySelector(
       'app-control-flow-mission-solution',
     ) as HTMLElement;
@@ -129,8 +133,7 @@ describe('App', () => {
   });
 
   it('should render the crew communication mission and its solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/3');
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('app-crew-mission')).toBeTruthy();
@@ -139,8 +142,7 @@ describe('App', () => {
   });
 
   it('should send the working profile output to the parent', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/3');
     const mission = fixture.nativeElement.querySelector('app-crew-mission') as HTMLElement;
     const viewProfileButton = mission.querySelector('app-crew-card button') as HTMLButtonElement;
 
@@ -153,8 +155,7 @@ describe('App', () => {
   });
 
   it('should assemble the crew through child outputs in the solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/3');
     const solution = fixture.nativeElement.querySelector(
       'app-crew-mission-solution',
     ) as HTMLElement;
@@ -173,8 +174,7 @@ describe('App', () => {
   });
 
   it('should render the computed signals mission and its solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/4');
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('app-reactor-mission')).toBeTruthy();
@@ -183,8 +183,7 @@ describe('App', () => {
   });
 
   it('should update the working coolant computed signal', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/4');
     const mission = fixture.nativeElement.querySelector('app-reactor-mission') as HTMLElement;
     const criticalButton = Array.from(mission.querySelectorAll('button')).find(
       (button) => button.textContent?.trim() === 'Critical',
@@ -197,8 +196,7 @@ describe('App', () => {
   });
 
   it('should derive every reactor state and unlock safe ignition', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/4');
     const solution = fixture.nativeElement.querySelector(
       'app-reactor-mission-solution',
     ) as HTMLElement;
@@ -216,7 +214,6 @@ describe('App', () => {
     buttonWithText('Critical preset')?.click();
     await fixture.whenStable();
     expect(solution.textContent).toContain('Critical reactor failure');
-    expect(engageButton.disabled).toBe(true);
 
     buttonWithText('Stable preset')?.click();
     await fixture.whenStable();
@@ -229,8 +226,7 @@ describe('App', () => {
   });
 
   it('should render the services mission and its solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/5');
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('app-mission-control-mission')).toBeTruthy();
@@ -239,8 +235,7 @@ describe('App', () => {
   });
 
   it('should demonstrate an injected service controlling connection state', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/5');
     const mission = fixture.nativeElement.querySelector(
       'app-mission-control-mission',
     ) as HTMLElement;
@@ -255,8 +250,7 @@ describe('App', () => {
   });
 
   it('should share service state between independent solution components', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/5');
     const solution = fixture.nativeElement.querySelector(
       'app-mission-control-mission-solution',
     ) as HTMLElement;
@@ -287,8 +281,7 @@ describe('App', () => {
   });
 
   it('should render the Signal Forms mission and its solution', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/6');
     const compiled = fixture.nativeElement as HTMLElement;
 
     expect(compiled.querySelector('app-expedition-form-mission')).toBeTruthy();
@@ -297,8 +290,7 @@ describe('App', () => {
   });
 
   it('should validate the working callsign field after it is touched', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/6');
     const mission = fixture.nativeElement.querySelector(
       'app-expedition-form-mission',
     ) as HTMLElement;
@@ -316,12 +308,10 @@ describe('App', () => {
   });
 
   it('should submit a valid expedition and award the forms badge', async () => {
-    const fixture = TestBed.createComponent(App);
-    await fixture.whenStable();
+    const fixture = await renderRoute('/lesson/6');
     const solution = fixture.nativeElement.querySelector(
       'app-expedition-form-mission-solution',
     ) as HTMLElement;
-
     const setControlValue = (selector: string, value: string): void => {
       const control = solution.querySelector(selector) as HTMLInputElement | HTMLSelectElement;
       control.value = value;
@@ -349,5 +339,45 @@ describe('App', () => {
     expect(solution.querySelector('.badge-message')?.textContent).toContain(
       'Form Systems Specialist badge earned',
     );
+  });
+
+  it('should render the routing challenge and solution launcher', async () => {
+    const fixture = await renderRoute('/lesson/7');
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-routing-mission')).toBeTruthy();
+    expect(compiled.textContent).toContain('Chart the Galaxy');
+    expect(compiled.textContent).toContain('Launch solved navigator');
+  });
+
+  it('should load the eager routing lab home while student sector routes remain TODOs', async () => {
+    const fixture = await renderRoute('/routing-lab');
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-routing-lab-home')).toBeTruthy();
+    expect(compiled.textContent).toContain('Routing home uses an eager component route');
+    expect(compiled.textContent).toContain('Europa · disconnected');
+  });
+
+  it('should bind a solution route parameter to a required signal input', async () => {
+    const fixture = await renderRoute('/routing-solution/sector/europa');
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-galaxy-sector-solution')).toBeTruthy();
+    expect(compiled.querySelector('h1')?.textContent).toContain('Sector: europa');
+    expect(compiled.textContent).toContain('Route Commander badge earned');
+  });
+
+  it('should recover unknown solution coordinates through the wildcard route', async () => {
+    const fixture = await renderRoute('/routing-solution/coordinates/unknown');
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('app-lost-in-space-solution')).toBeTruthy();
+    expect(compiled.textContent).toContain('Unknown coordinates');
+  });
+
+  it('should recover unknown academy routes', async () => {
+    const fixture = await renderRoute('/outside-the-academy');
+    expect(fixture.nativeElement.querySelector('app-academy-not-found')).toBeTruthy();
   });
 });

@@ -1,0 +1,41 @@
+<section class="route-screen">
+  <p class="eyebrow">Solved navigation system</p>
+  <h1 data-route-heading tabindex="-1">Galaxy route map</h1>
+  <p>This home is eager. Choose a lazy sector route and compare how the two are configured.</p>
+
+  <nav aria-label="Solved sector routes">
+    <a
+      routerLink="/routing-solution"
+      routerLinkActive="active-route"
+      ariaCurrentWhenActive="page"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Route map
+    </a>
+    <a
+      [routerLink]="['/routing-solution/sector', 'europa']"
+      routerLinkActive="active-route"
+      ariaCurrentWhenActive="page"
+    >
+      Europa
+    </a>
+    <a
+      [routerLink]="['/routing-solution/sector', 'titan']"
+      routerLinkActive="active-route"
+      ariaCurrentWhenActive="page"
+    >
+      Titan
+    </a>
+    <a routerLink="/routing-solution/coordinates/unknown">Test unknown route</a>
+  </nav>
+
+  <div class="status-panel">
+    <strong>Solution home uses component: RoutingSolutionHome</strong>
+    <p>
+      The sector uses loadComponent instead. Browser back, forward, refresh, and bookmarks work with
+      both loading strategies.
+    </p>
+  </div>
+
+  <a class="return-link" routerLink="/lesson/7">Return to Level 7</a>
+</section>

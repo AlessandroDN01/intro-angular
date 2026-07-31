@@ -1,0 +1,47 @@
+<article class="routing-card" aria-label="Student galaxy routing challenge">
+  <header>
+    <p class="kicker">Navigation computer</p>
+    <h3>Student route map</h3>
+  </header>
+
+  <section class="working-example">
+    <p class="step">Working example · RouterLink and active state</p>
+    <a
+      routerLink="/routing-lab"
+      routerLinkActive="active-route"
+      ariaCurrentWhenActive="page"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Launch navigation lab
+    </a>
+    <p>
+      This link changes the URL without reloading the document and identifies itself as the current
+      page when active.
+    </p>
+    <p>
+      Its destination uses an eager <code>component</code> route. Compare that route with the lazy
+      <code>loadComponent</code> sector route in <code>app.routes.ts</code>.
+    </p>
+  </section>
+
+  <ol class="objectives">
+    <li>
+      <span>01</span>
+      Replace the disconnected sector links in
+      <code>routing-lab-home.html</code> with <code>routerLink</code>.
+    </li>
+    <li>
+      <span>02</span>
+      Add <code>routerLinkActive</code> and <code>ariaCurrentWhenActive="page"</code>.
+    </li>
+    <li>
+      <span>03</span>
+      Compare the eager home route, then add the lazy <code>sector/:sectorId</code> route in
+      <code>app.routes.ts</code>.
+    </li>
+    <li>
+      <span>04</span>
+      Add a final wildcard route for unknown coordinates.
+    </li>
+  </ol>
+</article>

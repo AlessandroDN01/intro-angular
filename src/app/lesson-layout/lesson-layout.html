@@ -1,0 +1,36 @@
+<div class="lesson-page">
+  <header class="lesson-header">
+    <p class="eyebrow">Angular Academy · Level {{ level() }}</p>
+    <h1 data-route-heading tabindex="-1">{{ title() }}</h1>
+    <p class="intro">{{ intro() }}</p>
+  </header>
+
+  <section class="lesson-grid" [attr.aria-label]="title() + ' lesson'">
+    <div>
+      <div class="section-heading">
+        <span aria-hidden="true">01</span>
+        <div>
+          <p>Student mission</p>
+          <h2>{{ studentTitle() }}</h2>
+        </div>
+      </div>
+      <ng-content select="[student]" />
+    </div>
+
+    <aside>
+      <div class="section-heading">
+        <span aria-hidden="true">02</span>
+        <div>
+          <p>Self-study reference</p>
+          <h2>Compare with the solution</h2>
+        </div>
+      </div>
+
+      <details>
+        <summary>{{ solutionSummary() }}</summary>
+        <p class="hint">{{ solutionHint() }}</p>
+        <ng-content select="[solution]" />
+      </details>
+    </aside>
+  </section>
+</div>

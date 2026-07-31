@@ -285,11 +285,70 @@ Students connect and validate commander email, destination, crew size, and
 safety acceptance, then repair validated submission. Tests interact with the
 real DOM controls to confirm data reaches the typed model.
 
+### Level 7: Chart the Galaxy
+
+Badge: **Route Commander**
+
+Student lesson and routing-lab files:
+
+- `src/app/lesson-seven-page/lesson-seven-page.ts`
+- `src/app/routing-mission/routing-mission.ts`
+- `src/app/routing-lab-home/routing-lab-home.ts`
+- `src/app/student-galaxy-sector/student-galaxy-sector.ts`
+- `src/app/student-lost-in-space/student-lost-in-space.ts`
+- Student TODO routes in `src/app/app.routes.ts`
+
+Solved routing files:
+
+- `src/app/routing-solution-launcher/routing-solution-launcher.ts`
+- `src/app/routing-solution-home/routing-solution-home.ts`
+- `src/app/galaxy-sector-solution/galaxy-sector-solution.ts`
+- `src/app/lost-in-space-solution/lost-in-space-solution.ts`
+- Solved routes under the `routing-solution` path in `src/app/app.routes.ts`
+
+Concepts:
+
+- Route configuration
+- `RouterOutlet`
+- `RouterLink` and `RouterLinkActive`
+- Accessible current-page state with `ariaCurrentWhenActive`
+- Eager route components with a normal import and `component`
+- Lazy standalone components with `loadComponent`
+- Downloading component code versus creating a component instance
+- Parameterized routes
+- Route parameters bound to required signal inputs
+- `withComponentInputBinding()`
+- Default redirects and wildcard recovery routes
+- Route-aware focus management
+- URLs, browser history, refresh, and bookmark behavior
+
+The real application was converted from one long page into a routed academy.
+The root is now an application shell, the academy dashboard is lazy-loaded, and
+Levels 1–7 each have their own lazy page chunk. Existing lesson pages retain the
+student mission and hidden solution through the reusable `LessonLayout`.
+
+Because navigation itself is the Level 7 behavior, its solution disclosure
+links to a separate working `routing-solution` route tree. The incomplete
+student `routing-lab` and complete solution coexist under different URL
+prefixes, avoiding multiple-router complexity. The home component in each tree
+is eagerly imported as a direct comparison with its lazy sector components.
+
 ## Current application structure
 
-`src/app/app.html` presents all levels sequentially. Each student mission appears
-beside a hidden solved component. `src/app/app.ts` imports the lesson components.
-`src/app/app.spec.ts` contains rendering and behavioral tests across the levels.
+`src/app/app.html` is the accessible application shell and primary
+`RouterOutlet`. `src/app/app.routes.ts` lazy-loads the academy dashboard, lesson
+pages, sector simulators, and recovery pages. The two routing-home examples are
+eager so students can compare `component` with `loadComponent`. Each Level 1–6
+and Level 8 route uses `LessonLayout` to present the student mission beside a
+hidden solved component. Level 7 launches its interactive solved route from the
+disclosure.
+
+The main navigation routes are:
+
+- `/academy`
+- `/lesson/1` through `/lesson/8`
+- `/routing-lab` for the student routing exercise
+- `/routing-solution` for the working routing reference
 
 The custom Aurora spaceship asset is:
 
@@ -297,7 +356,7 @@ The custom Aurora spaceship asset is:
 
 Current validation baseline:
 
-- 20 unit tests pass.
+- 27 unit tests pass.
 - Strict TypeScript compilation passes.
 - The Angular production build passes.
 - The project uses NVM Node `24.18.0`; load NVM and run `nvm use 24` when a shell
@@ -317,30 +376,51 @@ npm run build
 The roadmap is a direction, not a rigid commitment. Discuss the next lesson with
 the teacher before implementing it.
 
-### Level 7: Chart the Galaxy
+### Level 8: Open the Galactic Data Link
 
-Primary concepts: routing and lazy-loaded feature routes.
+Badge: **Galactic Communications Officer**
 
-Possible mission:
+Student files:
 
-- Turn academy levels into navigable sectors.
-- Lazy-load a feature route.
-- Add an accessible navigation system and active state.
+- `src/app/galactic-http-mission/galactic-http-mission.ts`
+- `src/app/galactic-http-mission/galactic-http-mission.html`
+- `src/app/galactic-http-mission/galactic-http-mission.css`
 
-Possible badge: **Route Commander**
+Solution files:
 
-### Level 8: Receive Deep-Space Data
+- `src/app/galactic-http-mission-solution/galactic-http-mission-solution.ts`
+- `src/app/galactic-http-mission-solution/galactic-http-mission-solution.html`
 
-Primary concepts: HTTP, asynchronous state, loading, success, empty, and error
-states.
+Shared HTTP files:
 
-Possible mission:
+- `src/app/galactic-http/galactic-http.models.ts`
+- `src/app/galactic-http/galactic-archive.service.ts`
+- `src/app/galactic-http/mission-report.service.ts`
 
-- Retrieve mission data from an API.
-- Display loading and error states.
-- Reuse native control flow for all asynchronous outcomes.
+Concepts:
 
-Possible badge: **Deep-Space Operator**
+- Configuring Angular's HTTP infrastructure with `provideHttpClient()`
+- Reactive GET requests with `httpResource`
+- Signal-dependent URLs, eager loading, cancellation, retry, and resource state
+- Guarding resource values with `hasValue()`
+- Classic GET requests with `HttpClient`
+- Cold Observables and template subscription with `AsyncPipe`
+- Focused API services and typed response models
+- Signal Forms validation reused from Level 6
+- User-triggered POST requests with `HttpClient.post()`
+- Converting a one-response Observable with `firstValueFrom()`
+- Separate form-validity and HTTP-submission state
+- Loading, success, and error feedback with accessible live regions
+- HTTP tests with `HttpTestingController`
+
+The two complete scanners retrieve SWAPI-compatible character data from
+`swapi.info` using the reactive and
+classic Angular HTTP styles so students can compare them directly. Students
+then repair a Signal Form transmitter and send its typed report to
+JSONPlaceholder. The service simulates creation but does not persist submitted
+reports. The POST remains usable when the independent character API is down.
+Automated tests intercept every request and never depend on either external API
+being available.
 
 ## Resuming in a new session
 

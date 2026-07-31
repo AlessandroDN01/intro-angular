@@ -1,0 +1,29 @@
+<section class="route-screen">
+  <p class="eyebrow">Parameterized solution route</p>
+  <h1 data-route-heading tabindex="-1">Sector: {{ sectorId() }}</h1>
+  <p>
+    <code>withComponentInputBinding()</code> delivered the <code>:sectorId</code> URL parameter to
+    this component's required input.
+  </p>
+
+  <nav aria-label="Solved sector routes">
+    <a routerLink="/routing-solution">Route map</a>
+    <a
+      [routerLink]="['/routing-solution/sector', 'europa']"
+      routerLinkActive="active-route"
+      ariaCurrentWhenActive="page"
+    >
+      Europa
+    </a>
+    <a
+      [routerLink]="['/routing-solution/sector', 'titan']"
+      routerLinkActive="active-route"
+      ariaCurrentWhenActive="page"
+    >
+      Titan
+    </a>
+  </nav>
+
+  <p class="badge">Coordinates decoded — Route Commander badge earned!</p>
+  <a class="return-link" routerLink="/lesson/7">Return to Level 7</a>
+</section>
